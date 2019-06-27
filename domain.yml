@@ -1,0 +1,25 @@
+intents:
+- greet
+- goodbye
+- thanks
+- callapi
+- schedule
+
+actions:
+- utter_thanks
+- utter_greet
+- utter_goodbye
+- action_schedule
+
+
+templates:
+  
+  utter_greet:
+  - text: "Hello how can I help?"
+
+  utter_goodbye:
+  - text: "Talk to you later!"
+  
+  utter_thanks:
+  - text: "My pleasure."
+  
