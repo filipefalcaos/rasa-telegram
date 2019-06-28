@@ -1,6 +1,4 @@
-from subprocess import Popen, call, DEVNULL
 import argparse
-import time
 
 # Requests HTTP lib
 import requests
@@ -18,6 +16,9 @@ from rasa_core.utils import EndpointConfig
 
 # Telegram bot API base url
 BASE_URL = 'https://api.telegram.org/bot'
+
+# Message queue
+messages_to_return = []
 
 # Create a new CLI parser
 parser = argparse.ArgumentParser(description='RASA integration with Telegram')
@@ -45,9 +46,27 @@ def index():
         response_messages = rasa_response(message)
         send_message(chat_id, response_messages)
 
+        # Set the message to be returned
+        messages_to_return.append(chat_id)
         return Response('OK', status=200)
     else:
         return 'Hello!'
+
+
+# Accept info messages from a client
+# The '/info' route receives the POST request from an external server
+@app.route('/info', methods=['POST'])
+def info():
+    messages = []
+
+    # Get message data
+    r = request.get_json()
+    r = r['response']
+    messages.append(r)
+
+    # Send the message to the Telegram chat
+    send_message(messages_to_return.pop(), messages)
+    return Response('OK', status=200)
 
 
 # Extract the chat id and text from a given message
@@ -125,4 +144,4 @@ if __name__ == '__main__':
 
     # Setup Flask
     print('\nStarting the Flask server...')
-    app.run()
+    app.run(debug=True)
