@@ -24,26 +24,26 @@ pip3 install flask
 ```
 
 ## Running
-1 -  Train `RASA NLU` and `RASA core` by running:
+Train `RASA NLU` and `RASA core` by running:
 
 ```
 python3.7 -m rasa_nlu.train -c config.yml --data data/nlu.md -o models --fixed_model_name nlu --project rasa-telegram-app --verbose
 python3.7 -m rasa_core.train -d domain.yml -s data/stories.md -o models/rasa-telegram-app/core
 ```
 
-2 - Start a `ngrok` service on port 5000 and copy the **HTTPs** forwarding link (ex.: https://xxxxxxxx.ngrok.io):
+Start a `ngrok` service on port 5000 and copy the **HTTPs** forwarding link (ex.: https://xxxxxxxx.ngrok.io):
 
 ```
 ngrok http 5000
 ```
 
-3 - In a new terminal, start the action server:
+In a new terminal, start the action server:
 
 ```
 python3.7 -m rasa_core_sdk.endpoint --actions actions
 ```
 
-4 - In another terminal, start the Telegram bot:
+In another terminal, start the Telegram bot:
 
 ```
 python3.7 main.py --token <TOKEN> --tunnel <TUNNEL>
