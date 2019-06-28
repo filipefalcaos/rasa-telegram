@@ -1,9 +1,10 @@
 # rasa-telegram
-Integrates a RASA bot with the Telegram API.
+Integrates a RASA bot with the Telegram API. 
 
 ## Requirements
-**Python 3.7** and **pip3** should be installed in your system. Also, **Ngrok** should be installed and accessible 
-through the ```ngrok``` command.
+You must create a Telegram bot through **BotFather**. After creating a bot, you will be provided of its **API key**. This key will be later used in the ```main.py``` script.
+
+**Python 3.7** and **pip3** should be installed in your system. Also, **Ngrok** should be installed and accessible through the ```ngrok``` command.
 
 ## Installation
 To install ```rasa-x```, ```rasa_nlu```, and ```rasa_core```, run:
