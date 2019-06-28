@@ -22,6 +22,7 @@ BASE_URL = 'https://api.telegram.org/bot'
 # Create a new CLI parser
 parser = argparse.ArgumentParser(description='RASA integration with Telegram')
 parser.add_argument('--token', type=str, help='Telegram API bot token')
+parser.add_argument('--tunnel', type=str, help='URL for the Ngrok tunnel')
 
 # Parse input args
 args = parser.parse_args()
@@ -105,31 +106,10 @@ def rasa_config():
 # Starts Ngrok and sets a new tunnel to Telegram
 def ngrok_config():
 
-    # Kill running Ngrok processes
-    command = 'pkill ngrok'
-    call(command, shell=True)
-
-    # Spawn a new Ngrok process
-    command = 'ngrok http 5000'
-    Popen(command, shell=True, stderr=DEVNULL, stdout=DEVNULL)
-
-    # Get the list of HTTP tunnels
-    while True:
-        time.sleep(1)
-        r = requests.get('http://localhost:4040/api/tunnels')
-        r = r.json()
-        tunnels = r['tunnels']
-
-        # Ngrok successfully set the tunnels
-        if len(tunnels) > 0:
-            break
-
-    # Get the current tunnel
-    curr_tunnel = tunnels[0]['public_url']
-
     # Set the tunnel to Telegram
-    tunnel_url = BASE_URL + args.token + '/setWebhook?url=' + curr_tunnel
-    requests.get(tunnel_url)
+    tunnel_url = BASE_URL + args.token + '/setWebhook?url=' + args.tunnel
+    r = requests.get(tunnel_url)
+    print('Telegram Webhook: ' + r.json()['description'])
 
 
 # Entry point
@@ -139,7 +119,10 @@ if __name__ == '__main__':
     print('Loading RASA models...')
     agent = rasa_config()
 
-    # Setup Ngrok and Flask
-    print('\nStarting the Flask server...')
+    # Setup Ngrok
+    print('\nSetting the Telegram Ngrok webhook...')
     ngrok_config()
+
+    # Setup Flask
+    print('\nStarting the Flask server...')
     app.run()
