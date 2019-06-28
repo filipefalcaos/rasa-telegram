@@ -2,7 +2,7 @@
 Integrates a RASA bot with the Telegram API.
 
 ## Requirements
-**Python 3.7** and **pip3** should be installed in your system. Also, **ngrok** should be installed and accessible 
+**Python 3.7** and **pip3** should be installed in your system. Also, **Ngrok** should be installed and accessible 
 through the ```ngrok``` command.
 
 ## Installation
