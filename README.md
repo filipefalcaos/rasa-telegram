@@ -52,7 +52,7 @@ python3.7 main.py --token <TOKEN> --tunnel <TUNNEL>
 where \<TOKEN> should be replaced by the **API key** provided by BotFather and \<TUNNEL> should be replaced by the link you copied from the `ngrok` command.
 
 ## Test the /info endpoint
-Make a POST request to http://localhost:5000 with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint.
+Make a POST request to http://localhost:5000/info with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint.
 ```
 {
     "chat_id": 76418699,
