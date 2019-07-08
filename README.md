@@ -51,23 +51,25 @@ python3.7 main.py --token <TOKEN> --tunnel <TUNNEL>
 
 where \<TOKEN> should be replaced by the **API key** provided by BotFather and \<TUNNEL> should be replaced by the link you copied from the `ngrok` command.
 
+## Start a conversation
+Find the bot on Telegram by its username and then start a conversation. Once you start, the value of the global variable `current_chat` will be available.
+
 ## Test the /info endpoint
-Make a POST request to http://localhost:5000/info with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint.
+Make a POST request to http://localhost:5000/info with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint. The `chat_id`, `question`, and `response` fields are required. If you do not know your chat_id, you can access it through the global variable `current_chat`.
 ```
 {
     "chat_id": 76418699,
+    "question": "How much does it cost?",
     "response": [
         {
             "id": 1561,
-            "email": "SBaligian@mattis.gov",
-            "username": "MNewby",
-            "password": "13p4W"
+            "name": "Product 1",
+            "value": "R$ 150,00"
         },
         {
             "id": 1562,
-            "email": "FLeite@vestibulum.gov",
-            "username": "CLehman",
-            "password": "4CM77"
+            "name": "Product 2",
+            "value": "R$ 50,00"
         }
     ]
 }
