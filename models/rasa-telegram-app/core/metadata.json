@@ -12,11 +12,11 @@
     "utter_greet": {
       "slots": []
     },
-    "action_schedule": {
+    "action_call": {
       "slots": []
     }
   },
-  "python": "3.7.1",
+  "python": "3.7.3",
   "max_histories": [
     5,
     null,
@@ -32,7 +32,7 @@
     "rasa_core.policies.form_policy.FormPolicy",
     "rasa_core.policies.mapping_policy.MappingPolicy"
   ],
-  "trained_at": "20190630-161904",
+  "trained_at": "20190708-114340",
   "rasa_core": "0.14.5",
   "tensorflow": "1.13.1",
   "sklearn": "0.20.3"

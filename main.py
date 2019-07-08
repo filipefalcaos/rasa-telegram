@@ -58,21 +58,35 @@ def index():
 
 # Accept info messages from a client
 # The '/info' route receives the POST request from an external server
+# This request should contain the chat_id, response, and question fields
 @app.route('/info', methods=['POST'])
 def info():
     messages = []
-    chat_id = current_chat
 
-    # Get message data
+    # Get message data (chat_id, response, and question fields)
+    # If you do not know yur chat_id, use the value of the global variable 'current_chat'
     r = request.get_json()
     response_data = r['response']
+    chat_id = r['chat_id']
+    user_question = r['question']
+
+    # Set the provided response
     messages.append(response_data)
 
-    # Create a Telegram response
+    # Create a Telegram response channel
     telegram_output = TelegramOutput(access_token=args.token)
 
+    # Inform the user on the previous question
+    message = 'You previously asked: ' + user_question + '\nHere is your answer:'
+    telegram_output.send_message(chat_id=chat_id, text=message)
+
+    # Send the bot response
     for message in messages:
         telegram_output.send_message(chat_id=chat_id, text=message)
+
+    # Execute an action
+    agent.execute_action(sender_id=chat_id, action='action_restart', output_channel=telegram_output,
+                         policy='', confidence=1)
 
     return Response('OK', status=200)
 

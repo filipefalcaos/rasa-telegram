@@ -182,36 +182,24 @@
         "text": "cool thank you"
       },
       {
-        "intent": "schedule",
-        "text": "call your action"
+        "intent": "call",
+        "text": "do you know how much it costs?"
       },
       {
-        "intent": "schedule",
-        "text": "show me custom action"
+        "intent": "call",
+        "text": "how much?"
       },
       {
-        "intent": "schedule",
-        "text": "call your api"
+        "intent": "call",
+        "text": "what is the price?"
       },
       {
-        "intent": "schedule",
-        "text": "show your service"
+        "intent": "call",
+        "text": "price?"
       },
       {
-        "intent": "schedule",
-        "text": "show your action"
-      },
-      {
-        "intent": "schedule",
-        "text": "call your custom action"
-      },
-      {
-        "intent": "schedule",
-        "text": "action"
-      },
-      {
-        "intent": "schedule",
-        "text": "custom"
+        "intent": "call",
+        "text": "cost?"
       }
     ],
     "regex_features": [],

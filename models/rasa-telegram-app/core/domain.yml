@@ -4,7 +4,7 @@ actions:
 - utter_thanks
 - utter_greet
 - utter_goodbye
-- action_schedule
+- action_call
 config:
   store_entities_as_slots: true
 entities: []
@@ -16,11 +16,13 @@ intents:
     use_entities: true
 - thanks:
     use_entities: true
-- callapi:
+- call:
     use_entities: true
-- schedule:
-    use_entities: true
-slots: {}
+slots:
+  last_question:
+    auto_fill: true
+    initial_value: ''
+    type: rasa_core.slots.TextSlot
 templates:
   utter_goodbye:
   - text: Talk to you later!

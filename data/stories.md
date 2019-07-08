@@ -10,7 +10,7 @@
 * thanks
  - utter_thanks
  
-## story_schedule
-* schedule
- - action_schedule
+## story_call
+* call
+ - action_call
  

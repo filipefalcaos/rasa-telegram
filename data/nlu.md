@@ -49,12 +49,9 @@
 - cool, thanks
 - cool thank you
 
-## intent:schedule
-- call your action 
-- show me custom action
-- call your api
-- show your service 
-- show your action
-- call your custom action
-- action
-- custom
+## intent:call
+- do you know how much it costs?
+- how much?
+- what is the price?
+- price? 
+- cost?

@@ -1,17 +1,24 @@
+# Intents
 intents:
 - greet
 - goodbye
 - thanks
-- callapi
-- schedule
+- call
 
+# Actions
 actions:
 - utter_thanks
 - utter_greet
 - utter_goodbye
-- action_schedule
+- action_call
 
+# Slots
+slots:
+  last_question:
+    type: text
+    initial_value: ""
 
+# Templates
 templates:
   
   utter_greet:
