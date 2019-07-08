@@ -1,0 +1,7 @@
+Flask==1.0.2
+rasa_sdk==1.1.0
+requests==2.22.0
+rasa==1.1.4
+typing==3.7.4
+rasa_core==0.14.5
+rasa_core_sdk==0.14.0
