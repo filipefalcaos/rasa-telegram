@@ -55,21 +55,16 @@ where \<TOKEN> should be replaced by the **API key** provided by BotFather and \
 Find the bot on Telegram by its username and then start a conversation. Once you start, the value of the global variable `current_chat` will be available.
 
 ## Test the /info endpoint
-Make a POST request to http://localhost:5000/info with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint. The `chat_id`, `question`, and `response` fields are required. If you do not know your chat_id, you can access it through the global variable `current_chat`.
-```
+Make a POST request to http://localhost:5000/info with the data below. You can use [Postman](https://www.getpostman.com/) to test the endpoint. The `chat_id`, `question`, and `response` fields are required. If you do not know your `chat_id`, you can access it through the global variable `current_chat`.
+```json
 {
-    "chat_id": 76418699,
-    "question": "How much does it cost?",
+    "chat_id": "76418699/filipefalcaos",
+    "question": "How much does a fork cost?",
     "response": [
         {
             "id": 1561,
-            "name": "Product 1",
+            "name": "Fork",
             "value": "R$ 150,00"
-        },
-        {
-            "id": 1562,
-            "name": "Product 2",
-            "value": "R$ 50,00"
         }
     ]
 }
