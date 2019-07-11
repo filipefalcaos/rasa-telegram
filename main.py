@@ -43,12 +43,12 @@ def index():
 
         # Get message data
         msg = request.get_json()
-        chat_id, message = parse_msg(msg)
+        chat_id, message, username = parse_msg(msg)
         current_chat = chat_id
 
         # Get RASA response and send through the API
-        response_messages = rasa_response(message)
-        send_message(chat_id, response_messages)
+        response_messages = rasa_response(message, str(chat_id) + '/' + username)
+        send_message(str(chat_id) + '/' + username, response_messages)
 
         # Set the message to be returned
         return Response('OK', status=200)
@@ -70,6 +70,10 @@ def info():
     chat_id = r['chat_id']
     user_question = r['question']
 
+    # Get the current chat username
+    # The sender_id is in the format [chat_id]/[username]
+    username = chat_id.split('/')[1]
+
     # Set the provided response
     messages.append(response_data)
 
@@ -77,7 +81,8 @@ def info():
     telegram_output = TelegramOutput(access_token=args.token)
 
     # Inform the user on the previous question
-    message = 'You previously asked: ' + user_question + '\nHere is your answer:'
+    message = 'Hey ' + username + '\n'
+    message = message + 'You previously asked: ' + user_question + ' Here is your answer:'
     telegram_output.send_message(chat_id=chat_id, text=message)
 
     # Send the bot response
@@ -97,7 +102,8 @@ def parse_msg(message):
     global current_chat
     current_chat = message['message']['chat']['id']
     txt = message['message']['text']
-    return current_chat, txt
+    username = message['message']['chat']['username']
+    return current_chat, txt, username
 
 
 # Send message through the Telegram API
@@ -118,10 +124,10 @@ def send_message(chat_id, messages=None):
 
 # Get response using RASA
 # The handle_message method is responsible for processing the message
-def rasa_response(message):
+def rasa_response(message, chat_id):
 
     # Get RASA responses for a given message
-    responses = agent.handle_message(message)
+    responses = agent.handle_text(message, sender_id=chat_id)
     text = []
 
     # RASA responded
