@@ -44,11 +44,11 @@ def index():
         # Get message data
         msg = request.get_json()
         chat_id, message, username = parse_msg(msg)
-        current_chat = chat_id
+        current_chat = str(chat_id) + '/' + username
 
         # Get RASA response and send through the API
-        response_messages = rasa_response(message, str(chat_id) + '/' + username)
-        send_message(str(chat_id) + '/' + username, response_messages)
+        response_messages = rasa_response(message, current_chat)
+        send_message(current_chat, response_messages)
 
         # Set the message to be returned
         return Response('OK', status=200)
