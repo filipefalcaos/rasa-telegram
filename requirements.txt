@@ -1,4 +1,4 @@
-Flask==1.0.2
+Flask==2.3.2
 rasa_sdk==1.1.0
 requests==2.22.0
 rasa==1.1.4
